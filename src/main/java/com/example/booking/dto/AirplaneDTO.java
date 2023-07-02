@@ -25,8 +25,8 @@ public class AirplaneDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     private Integer flightNumber;
-    private long sourceCity;
-    private long targetCity;
+    private City sourceCity;
+    private City targetCity;
     private Date departDate;
     private Date returnDate;
     private Integer numOfPassenger;
