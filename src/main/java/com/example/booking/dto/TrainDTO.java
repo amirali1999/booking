@@ -24,16 +24,16 @@ public class TrainDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     private Integer trainNumber;
-    private Long sourceCity;
-    private Long targetCity;
+    private Long sourceCityId;
+    private Long targetCityId;
     private Date departDate;
     private Date returnDate;
     private Integer numOfPassenger;
     private Collection<String> trainFacilities;
     private String trainType;
     private String logo;
-    private List<Long> photos;
+    private List<Long> photosId;
     private boolean cancel;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<Long> passengers;
+    private List<Long> passengersId;
 }

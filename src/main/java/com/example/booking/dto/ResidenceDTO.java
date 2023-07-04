@@ -27,15 +27,15 @@ public class ResidenceDTO {
     private Integer residenceNumber;
     private String name;
     private String residenceType;
-    private long city;
+    private long cityId;
     private Date departDate;
     private Date returnDate;
     private Integer numOfPassenger;
     private Collection<String> residenceFacilities;
     private String starType;
     private String logo;
-    private List<Long> photos;
+    private List<Long> photosId;
     private boolean cancel;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<Long> passengers;
+    private List<Long> passengersId;
 }

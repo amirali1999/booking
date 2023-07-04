@@ -24,5 +24,5 @@ public class UserDTO {
     private String address;
     private Date birthday;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<Long> passengers;
+    private List<Long> passengersId;
 }

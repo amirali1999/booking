@@ -37,5 +37,5 @@ public class AirplaneDTO {
     private String logo;
     private boolean cancel;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<Long> passengers_id;
+    private List<Long> passengersId;
 }
