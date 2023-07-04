@@ -20,8 +20,8 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
-    @Column(name = "label",nullable = false)
+    @Column(name = "label",nullable = false,unique = true)
     private String label;
-    @Column(name = "value",nullable = false)
+    @Column(name = "value",nullable = false,unique = true)
     private String value;
 }
