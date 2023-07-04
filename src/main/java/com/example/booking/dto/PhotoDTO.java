@@ -21,6 +21,6 @@ public class PhotoDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
     private String url;
-    private long residence;
-    private long train;
+    private long residenceId;
+    private long trainId;
 }
