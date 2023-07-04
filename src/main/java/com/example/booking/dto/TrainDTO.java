@@ -6,10 +6,7 @@ import com.example.booking.model.City;
 import com.example.booking.model.Passenger;
 import com.example.booking.model.Photo;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -22,6 +19,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TrainDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;

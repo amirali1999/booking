@@ -2,10 +2,7 @@ package com.example.booking.dto;
 
 import com.example.booking.model.Passenger;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import java.util.Date;
@@ -15,6 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class UserDTO {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
