@@ -25,9 +25,8 @@ public class PassengerDTO {
     private long nationalCode;
     private long phoneNumber;
     private String gender;
-    private long user;
-    private long airplane;
-    private long train;
-    private long residence;
-    private boolean deleted;
+    private long userId;
+    private long airplaneId;
+    private long trainId;
+    private long residenceId;
 }
