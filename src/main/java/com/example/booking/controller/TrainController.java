@@ -1,6 +1,7 @@
 package com.example.booking.controller;
 
 import com.example.booking.dto.TrainDTO;
+import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.service.TrainService;
 import org.springframework.http.ResponseEntity;
@@ -20,11 +21,11 @@ public class TrainController {
         return trainService.getTrain().createResponseEntity();
     }
     @PostMapping
-    public ResponseEntity<?> postTrain(@RequestBody TrainDTO trainDTO){
+    public ResponseEntity<?> postTrain(@RequestBody TrainDTO trainDTO) throws BookingException.NotFoundException {
         return trainService.postTrain(trainDTO).createResponseEntity();
     }
     @DeleteMapping("{trainId}")
-    public ResponseEntity<?> deleteTrain(@PathVariable("trainId") Long id){
+    public ResponseEntity<?> deleteTrain(@PathVariable("trainId") Long id) throws BookingException.NotFoundException {
         return trainService.deleteTrain(id).createResponseEntity();
     }
     @PatchMapping("{trainId}")

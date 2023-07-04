@@ -1,6 +1,7 @@
 package com.example.booking.controller;
 
 import com.example.booking.dto.PhotoDTO;
+import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.model.Photo;
 import com.example.booking.service.PhotoService;
@@ -24,11 +25,11 @@ public class PhotoController {
         return photoService.getPhoto().createResponseEntity();
     }
     @PostMapping
-    public ResponseEntity<?> postPhoto(@RequestBody PhotoDTO photoDTO){
+    public ResponseEntity<?> postPhoto(@RequestBody PhotoDTO photoDTO) throws BookingException.NotFoundException {
         return photoService.postPhoto(photoDTO).createResponseEntity();
     }
     @DeleteMapping("{photoId}")
-    public ResponseEntity<?> deletePhoto(@PathVariable("photoId") Long id){
+    public ResponseEntity<?> deletePhoto(@PathVariable("photoId") Long id) throws BookingException.NotFoundException {
         return photoService.deletePhoto(id).createResponseEntity();
     }
     @PatchMapping("{photoId}")

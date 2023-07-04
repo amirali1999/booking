@@ -22,7 +22,7 @@ public class AirplaneController {
         return airplaneService.getAirplane().createResponseEntity();
     }
     @PostMapping
-    public ResponseEntity<?> postAirplane(@RequestBody AirplaneDTO airplaneDTO){
+    public ResponseEntity<?> postAirplane(@RequestBody AirplaneDTO airplaneDTO) throws BookingException.NotFoundException {
 
         return airplaneService.postAirplane(airplaneDTO).createResponseEntity();
     }
@@ -32,7 +32,7 @@ public class AirplaneController {
     }
     @PatchMapping({"{airplaneId}"})
     public ResponseEntity<?> patchAirplane(@PathVariable("airplaneId") Long id,
-                                           @RequestBody AirplaneDTO airplaneDTO){
+                                           @RequestBody AirplaneDTO airplaneDTO) throws BookingException.NotFoundException {
         return airplaneService.patchAirplane(id,airplaneDTO).createResponseEntity();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.booking.controller;
 
 import com.example.booking.dto.UserDTO;
+import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserController {
         return userService.postUser(userDTO).createResponseEntity();
     }
     @DeleteMapping("{userId}")
-    public ResponseEntity<?> deleteUser(@PathVariable("userId") Long id){
+    public ResponseEntity<?> deleteUser(@PathVariable("userId") Long id) throws BookingException.NotFoundException {
         return userService.deleteUser(id).createResponseEntity();
     }
     @PatchMapping("{userId}")

@@ -1,6 +1,7 @@
 package com.example.booking.controller;
 
 import com.example.booking.dto.ResidenceDTO;
+import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.model.Residence;
 import com.example.booking.service.ResidenceService;
@@ -28,7 +29,8 @@ public class ResidenceController {
         return residenceService.postResidence(residenceDTO).createResponseEntity();
     }
     @DeleteMapping("{residenceId}")
-    public ResponseEntity<?> deleteResidence(@PathVariable("residenceId") Long id){
+    public ResponseEntity<?> deleteResidence(@PathVariable("residenceId") Long id)
+            throws BookingException.NotFoundException {
         return residenceService.deleteResidence(id).createResponseEntity();
     }
     @PatchMapping("{residenceId}")
