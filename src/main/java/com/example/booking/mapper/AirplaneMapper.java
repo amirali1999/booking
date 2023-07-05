@@ -31,6 +31,7 @@ public interface AirplaneMapper {
     List<AirplaneDTO> DTOList(List<Airplane> airplanes);
     @Named("mapPassengersToId")
     static List<Long> mapPassengersToId(List<Passenger> passengers){
+        if(passengers == null) return null;
         return passengers.stream().map(Passenger::getId).collect(Collectors.toList());
     }
 }

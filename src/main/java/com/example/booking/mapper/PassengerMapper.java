@@ -18,31 +18,32 @@ import java.util.List;
 public interface PassengerMapper {
     @BeforeMapping
     default void beforeMapping(PassengerDTO passengerDTO,
-                               @MappingTarget Passenger passenger,
-                               AirplaneRepository airplaneRepository,
-                               TrainRepository trainRepository,
-                               ResidenceRepository residenceRepository)
+                               @MappingTarget Passenger.PassengerBuilder passenger,
+                               @Context AirplaneRepository airplaneRepository,
+                               @Context TrainRepository trainRepository,
+                               @Context ResidenceRepository residenceRepository)
             throws BookingException.NotFoundException {
         if(passengerDTO.getAirplaneId() != 0){
-            passenger.setAirplane(airplaneRepository.findById(passengerDTO.getAirplaneId())
+            passenger.airplane(airplaneRepository.findById(passengerDTO.getAirplaneId())
                     .orElseThrow(() -> new BookingException.NotFoundException("id")));
         }
-        else passenger.setAirplane(null);
+        else passenger.airplane(null);
         if(passengerDTO.getTrainId() != 0){
-            passenger.setTrain(trainRepository.findById(passengerDTO.getTrainId())
+            passenger.train(trainRepository.findById(passengerDTO.getTrainId())
                     .orElseThrow(()-> new BookingException.NotFoundException("id")));
         }
-        else passenger.setTrain(null);
+        else passenger.train(null);
         if(passengerDTO.getResidenceId() != 0){
-            passenger.setResidence(residenceRepository.findById(passengerDTO.getResidenceId())
+            passenger.residence(residenceRepository.findById(passengerDTO.getResidenceId())
                     .orElseThrow(() -> new BookingException.NotFoundException("id")));
         }
-        else passenger.setResidence(null);
+        else passenger.residence(null);
 
     }
     @Mapping(source = "airplane.id",target = "airplaneId")
     @Mapping(source = "train.id",target = "trainId")
     @Mapping(source = "residence.id",target = "residenceId")
+    @Mapping(source = "user.id",target = "userId")
     PassengerDTO ObjectToDTO(Passenger passenger);
     @Mapping(target = "airplane",ignore = true)
     @Mapping(target = "train",ignore = true)
@@ -53,6 +54,7 @@ public interface PassengerMapper {
                           @Context AirplaneRepository airplaneRepository,
                           @Context TrainRepository trainRepository,
                           @Context ResidenceRepository residenceRepository,
-                          @Context UserRepository userRepository);
+                          @Context UserRepository userRepository)
+            throws BookingException.NotFoundException;
     List<PassengerDTO> DTOList(List<Passenger> passengers);
 }
