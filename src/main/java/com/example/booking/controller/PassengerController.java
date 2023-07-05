@@ -25,7 +25,7 @@ public class PassengerController {
         return passengerService.getPassenger().createResponseEntity();
     }
     @PostMapping
-    public ResponseEntity<?> postPassenger(@RequestBody PassengerDTO passengerDTO){
+    public ResponseEntity<?> postPassenger(@RequestBody PassengerDTO passengerDTO) throws BookingException.NotFoundException {
         return passengerService.postPassenger(passengerDTO).createResponseEntity();
     }
     @DeleteMapping("{passengerId}")

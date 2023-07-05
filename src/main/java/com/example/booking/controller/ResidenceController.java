@@ -25,7 +25,7 @@ public class ResidenceController {
         return residenceService.getResidence().createResponseEntity();
     }
     @PostMapping
-    public ResponseEntity<?> postResidence(@RequestBody ResidenceDTO residenceDTO){
+    public ResponseEntity<?> postResidence(@RequestBody ResidenceDTO residenceDTO) throws BookingException.NotFoundException {
         return residenceService.postResidence(residenceDTO).createResponseEntity();
     }
     @DeleteMapping("{residenceId}")
