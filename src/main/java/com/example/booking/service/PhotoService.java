@@ -30,7 +30,7 @@ public class PhotoService {
 
     public Response getPhoto(){
         List<Photo> photos = photoRepository.findAll();
-        return new Response(HttpStatus.OK,"Get photo sucessfully",photos,1);
+        return new Response(HttpStatus.OK,"Get photo sucessfully",photoMapper.DTOList(photos),1);
     }
     public Response postPhoto(PhotoDTO photoDTO) throws BookingException.NotFoundException {
         Photo photo = photoMapper.DTOToObject(photoDTO,trainRepository,residenceRepository);
@@ -38,7 +38,7 @@ public class PhotoService {
         return new Response(
                 HttpStatus.OK,
                 "Post photo sucessfully",
-                photoMapper.ObjectToDTO(photo),
+                null,
                 1
         );
     }

@@ -36,7 +36,7 @@ public class PassengerService {
                 passengerMapper.DTOList(passengers),
                 1);
     }
-    public Response postPassenger(PassengerDTO passengerDTO){
+    public Response postPassenger(PassengerDTO passengerDTO) throws BookingException.NotFoundException {
         Passenger passenger = passengerMapper.DTOToObject(
                 passengerDTO,
                 airplaneRepository,

@@ -30,7 +30,7 @@ public class CityService {
                 1);
     }
     public Response postCity(CityDTO cityDTO) throws BookingException.DuplicateFieldException {
-        if (!cityRepository.findByLabel(cityDTO.getLabel()).isPresent()){
+        if (cityRepository.findByLabel(cityDTO.getLabel()).isPresent()){
             throw new BookingException.DuplicateFieldException("label");
         }
         if (cityRepository.findByValue(cityDTO.getValue()).isPresent()){

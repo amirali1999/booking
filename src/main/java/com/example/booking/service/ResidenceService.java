@@ -5,21 +5,23 @@ import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.mapper.ResidenceMapper;
 import com.example.booking.model.Residence;
+import com.example.booking.repository.CityRepository;
 import com.example.booking.repository.ResidenceRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.webjars.NotFoundException;
 
 import java.util.List;
 
 @Service
 public class ResidenceService {
     private final ResidenceRepository residenceRepository;
+    private final CityRepository cityRepository;
     private final ResidenceMapper residenceMapper = Mappers.getMapper(ResidenceMapper.class);
 
-    public ResidenceService(ResidenceRepository residenceRepository) {
+    public ResidenceService(ResidenceRepository residenceRepository, CityRepository cityRepository) {
         this.residenceRepository = residenceRepository;
+        this.cityRepository = cityRepository;
     }
 
     public Response getResidence(){
@@ -30,8 +32,8 @@ public class ResidenceService {
                 residenceMapper.DTOList(residences),
                 1);
     }
-    public Response postResidence(ResidenceDTO residenceDTO){
-        Residence residence = residenceMapper.DTOToObject(residenceDTO);
+    public Response postResidence(ResidenceDTO residenceDTO) throws BookingException.NotFoundException {
+        Residence residence = residenceMapper.DTOToObject(residenceDTO,cityRepository);
         residenceRepository.save(residence);
         return new Response(
                 HttpStatus.OK,
