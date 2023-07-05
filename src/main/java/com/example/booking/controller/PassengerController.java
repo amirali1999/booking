@@ -33,10 +33,4 @@ public class PassengerController {
             throws BookingException.NotFoundException {
         return passengerService.deletePassenger(id).createResponseEntity();
     }
-    @PatchMapping("{passengerId}")
-    public ResponseEntity<?> patchPassenger(@PathVariable("passengerId") Long id,
-                                            @RequestBody PassengerDTO passengerDTO)
-            throws BookingException.NotFoundException {
-        return passengerService.patchPassenger(id,passengerDTO).createResponseEntity();
-    }
 }

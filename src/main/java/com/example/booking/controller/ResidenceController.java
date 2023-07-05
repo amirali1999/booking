@@ -35,7 +35,7 @@ public class ResidenceController {
     }
     @PatchMapping("{residenceId}")
     public ResponseEntity<?> patchResidence(@PathVariable("residenceId") Long id,
-                                            @RequestBody ResidenceDTO residenceDTO){
+                                            @RequestBody ResidenceDTO residenceDTO) throws BookingException.NotFoundException {
         return residenceService.patchResidence(id,residenceDTO).createResponseEntity();
     }
 }

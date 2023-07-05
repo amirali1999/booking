@@ -30,7 +30,7 @@ public class TrainController {
     }
     @PatchMapping("{trainId}")
     public ResponseEntity<?> patchTrain(@PathVariable("trainId") Long id,
-                                        @RequestBody TrainDTO trainDTO){
+                                        @RequestBody TrainDTO trainDTO) throws BookingException.NotFoundException {
         return trainService.patchTrain(id,trainDTO).createResponseEntity();
     }
 }

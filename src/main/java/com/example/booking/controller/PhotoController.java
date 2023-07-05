@@ -34,7 +34,7 @@ public class PhotoController {
     }
     @PatchMapping("{photoId}")
     public ResponseEntity<?> patchPhoto(@PathVariable("photoId") Long id,
-                                        @RequestBody PhotoDTO photoDTO){
+                                        @RequestBody PhotoDTO photoDTO) throws BookingException.NotFoundException {
         return photoService.patchPhoto(id,photoDTO).createResponseEntity();
     }
 }

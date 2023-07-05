@@ -30,7 +30,7 @@ public class UserController {
     }
     @PatchMapping("{userId}")
     public ResponseEntity<?> patchUser(@PathVariable("userId") Long id,
-                                       @RequestBody UserDTO userDTO){
+                                       @RequestBody UserDTO userDTO) throws BookingException.NotFoundException, BookingException.DuplicateFieldException {
         return userService.patchUser(id,userDTO).createResponseEntity();
     }
 }
