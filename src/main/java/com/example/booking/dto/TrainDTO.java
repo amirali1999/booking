@@ -34,6 +34,7 @@ public class TrainDTO {
     private String logo;
     private List<Long> photosId;
     private boolean cancel;
+    private long price;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<Long> passengersId;
 }
