@@ -24,4 +24,6 @@ public class City {
     private String label;
     @Column(name = "value",nullable = false,unique = true)
     private String value;
+    @Column(name = "deleted",nullable = false,columnDefinition = "boolean default false")
+    private boolean deleted;
 }

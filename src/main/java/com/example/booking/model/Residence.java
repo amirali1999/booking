@@ -60,6 +60,8 @@ public class Residence {
     private List<Photo> photos;
     @Column(name = "cancel",nullable = false,columnDefinition = "boolean default false")
     private boolean cancel;
+    @Column(name = "price",nullable = false)
+    private long price;
     @Column(name = "deleted",nullable = false,columnDefinition = "boolean default false")
     private boolean deleted;
     @OneToMany(mappedBy = "residence",

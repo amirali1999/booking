@@ -8,7 +8,7 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
-@Table(name = "ut_hotel",schema = "public",catalog = "booking")
+@Table(name = "ut_photo",schema = "public",catalog = "booking")
 @Entity
 @Getter
 @Setter
@@ -24,12 +24,14 @@ public class Photo {
     private long id;
     @Column(name = "url")
     private String url;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "residence_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "residence_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Residence residence;
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "train_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "train_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Train train;
+    @Column(name = "deleted",nullable = false,columnDefinition = "boolean default false")
+    private boolean deleted;
 }
