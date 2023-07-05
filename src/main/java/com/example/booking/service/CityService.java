@@ -52,17 +52,19 @@ public class CityService {
     }
     public Response patchCity(Long id, CityDTO cityDTO)
             throws BookingException.NotFoundException, BookingException.DuplicateFieldException {
-        if (!cityRepository.findByLabel(cityDTO.getLabel()).isPresent()){
-            throw new BookingException.DuplicateFieldException("label");
+        City city = cityRepository.findById(id).orElseThrow(() -> new BookingException.NotFoundException("id"));
+        if(cityDTO.getLabel() != null){
+            if (cityRepository.findByLabel(cityDTO.getLabel()).isPresent()){
+                throw new BookingException.DuplicateFieldException("label");
+            }
+            city.setLabel(cityDTO.getLabel());
         }
-        if (cityRepository.findByValue(cityDTO.getValue()).isPresent()){
-            throw new BookingException.DuplicateFieldException("value");
+        if(cityDTO.getValue() != null){
+            if (cityRepository.findByValue(cityDTO.getValue()).isPresent()){
+                throw new BookingException.DuplicateFieldException("value");
+            }
+            city.setValue(cityDTO.getValue());
         }
-        if(!cityRepository.findById(id).isPresent()){
-            throw new BookingException.NotFoundException("id");
-        }
-        City city = cityMapper.DTOToObject(cityDTO);
-        city.setId(id);
         cityRepository.save(city);
         return new Response(
                 HttpStatus.OK,

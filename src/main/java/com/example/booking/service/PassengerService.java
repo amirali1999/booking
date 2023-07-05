@@ -56,18 +56,4 @@ public class PassengerService {
         passengerRepository.delete(passenger);
         return new Response(HttpStatus.OK,"Delete Passenger sucessfully",null,1);
     }
-    public Response patchPassenger(Long id, PassengerDTO passengerDTO) throws BookingException.NotFoundException {
-        if (!passengerRepository.findById(id).isPresent()){
-            throw new BookingException.NotFoundException("id");
-        }
-        Passenger passenger = passengerMapper.DTOToObject(
-                passengerDTO,
-                airplaneRepository,
-                trainRepository,
-                residenceRepository,
-                userRepository);
-        passenger.setId(id);
-        passengerRepository.save(passenger);
-        return new Response(HttpStatus.OK,"Patch Passenger sucessfully",null,1);
-    }
 }

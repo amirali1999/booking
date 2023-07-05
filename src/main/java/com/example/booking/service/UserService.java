@@ -44,7 +44,36 @@ public class UserService {
         userRepository.delete(user);
         return new Response(HttpStatus.OK,"Delete user successfully",null,1);
     }
-    public Response patchUser(Long id, UserDTO userDTO){
+    public Response patchUser(Long id, UserDTO userDTO) throws BookingException.NotFoundException, BookingException.DuplicateFieldException {
+        User user = userRepository.findById(id).orElseThrow(()->new BookingException.NotFoundException("id"));
+        if(userDTO.getFirstName() != null){
+            user.setFirstName(userDTO.getFirstName());
+        }
+        if(userDTO.getLastName() != null){
+            user.setLastName(userDTO.getLastName());
+        }
+        if(userDTO.getEmail() != null){
+            if(userRepository.findByEmail(userDTO.getEmail()).isPresent()){
+               throw new BookingException.DuplicateFieldException("email");
+            }
+            user.setEmail(userDTO.getEmail());
+        }
+        if(userDTO.getPhoneNumber() != 0){
+            if(userRepository.findByPhoneNumber(userDTO.getPhoneNumber()).isPresent()){
+                throw new BookingException.DuplicateFieldException("phone number");
+            }
+            user.setPhoneNumber(userDTO.getPhoneNumber());
+        }
+        if(userDTO.getPassword() != null){
+            user.setPassword(userDTO.getPassword());
+        }
+        if(userDTO.getAddress() != null){
+            user.setAddress(userDTO.getAddress());
+        }
+        if(userDTO.getBirthday() != null){
+            user.setBirthday(userDTO.getBirthday());
+        }
+        userRepository.save(user);
         return new Response(HttpStatus.OK,"Patch user successfully",null,1);
     }
 }

@@ -1,6 +1,8 @@
 package com.example.booking.service;
 
 import com.example.booking.dto.ResidenceDTO;
+import com.example.booking.enums.ResidenceType;
+import com.example.booking.enums.StarType;
 import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.mapper.ResidenceMapper;
@@ -48,7 +50,51 @@ public class ResidenceService {
         residenceRepository.delete(residence);
         return new Response(HttpStatus.OK,"Delete residence sucessfully",null,1);
     }
-    public Response patchResidence(Long id, ResidenceDTO residenceDTO){
+    public Response patchResidence(Long id, ResidenceDTO residenceDTO) throws BookingException.NotFoundException {
+        Residence residence = residenceRepository.findById(id)
+                .orElseThrow(() -> new BookingException.NotFoundException("id"));
+        if (residenceDTO.getResidenceNumber() != null){
+            residence.setResidenceNumber(residenceDTO.getResidenceNumber());
+        }
+        if(residenceDTO.getName() != null){
+            residence.setName(residenceDTO.getName());
+        }
+        if(residenceDTO.getResidenceType() !=  null){
+            residence.setResidenceType(ResidenceType.valueOf(residenceDTO.getResidenceType()));
+        }
+        if(residenceDTO.getCityId() != 0){
+            residence.setCity(cityRepository.findById(residenceDTO.getCityId())
+                    .orElseThrow(()->new BookingException.NotFoundException("id")));
+        }
+        if(residenceDTO.getDepartDate() != null){
+            residence.setDepartDate(residenceDTO.getDepartDate());
+        }
+        if(residenceDTO.getReturnDate() != null){
+            residence.setReturnDate(residenceDTO.getReturnDate());
+        }
+        if(residenceDTO.getNumOfPassenger() != null){
+            residence.setNumOfPassenger(residenceDTO.getNumOfPassenger());
+        }
+//        if(residenceDTO.getResidenceFacilities() != null){
+//            residence.set
+//        }
+        if(residenceDTO.getStarType() != null){
+            residence.setStarType(StarType.valueOf(residenceDTO.getStarType()));
+        }
+        if(residenceDTO.getLogo() != null){
+            residence.setLogo(residenceDTO.getLogo());
+        }
+//        if(residenceDTO.getPhotosId() != null){
+//            residence.set
+//        }
+        residence.setCancel(residenceDTO.isCancel());
+        if(residenceDTO.getPrice() != 0){
+            residence.setPrice(residenceDTO.getPrice());
+        }
+//        if(residenceDTO.getPassengersId() != null){
+//
+//        }
+        residenceRepository.save(residence);
         return new Response(HttpStatus.OK,"Patch residence sucessfully",null,1);
     }
 }

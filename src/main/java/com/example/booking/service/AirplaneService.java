@@ -1,10 +1,15 @@
 package com.example.booking.service;
 
 import com.example.booking.dto.AirplaneDTO;
+import com.example.booking.enums.AirplaneClassType;
+import com.example.booking.enums.AirplaneTicketType;
+import com.example.booking.enums.AirplaneType;
 import com.example.booking.exception.BookingException;
 import com.example.booking.exception.Response;
 import com.example.booking.mapper.AirplaneMapper;
 import com.example.booking.model.Airplane;
+import com.example.booking.model.City;
+import com.example.booking.model.Residence;
 import com.example.booking.repository.AirplaneRepository;
 import com.example.booking.repository.CityRepository;
 import org.mapstruct.factory.Mappers;
@@ -48,11 +53,52 @@ public class AirplaneService {
         return new Response(HttpStatus.OK,"Delete airplanes sucessfully",airplane,1);
     }
     public Response patchAirplane(Long id,AirplaneDTO airplaneDTO) throws BookingException.NotFoundException {
-        if(!airplaneRepository.findById(id).isPresent()){
-            throw new BookingException.NotFoundException("id");
+        Airplane airplane = airplaneRepository.findById(id)
+                .orElseThrow(() -> new BookingException.NotFoundException("id"));
+        if(airplaneDTO.getFlightNumber() != null){
+            airplane.setFlightNumber(airplaneDTO.getFlightNumber());
         }
-        Airplane airplane = airplaneMapper.DTOToObject(airplaneDTO,cityRepository);
-        airplane.setId(id);
+        if(airplaneDTO.getSourceCityId() != 0){
+            City city = cityRepository.findById(airplaneDTO.getSourceCityId())
+                    .orElseThrow(() -> new BookingException.NotFoundException("source city id"));
+            airplane.setSourceCity(city);
+        }
+        if(airplaneDTO.getTargetCityId() != 0){
+            City city = cityRepository.findById(airplaneDTO.getTargetCityId())
+                    .orElseThrow(() -> new BookingException.NotFoundException("target city id"));
+            airplane.setTargetCity(city);
+        }
+        if (airplaneDTO.getDepartDate() != null){
+            airplane.setDepartDate(airplaneDTO.getDepartDate());
+        }
+        if(airplaneDTO.getReturnDate() != null){
+            airplane.setReturnDate(airplaneDTO.getReturnDate());
+        }
+        if(airplaneDTO.getNumOfPassenger() != null){
+            airplane.setNumOfPassenger(airplaneDTO.getNumOfPassenger());
+        }
+        if(airplaneDTO.getPrice() != 0){
+            airplane.setPrice(airplaneDTO.getPrice());
+        }
+        if(airplaneDTO.getTerminalNumber() != null){
+            airplane.setTerminalNumber(airplaneDTO.getTerminalNumber());
+        }
+        if(airplaneDTO.getAmountOfLoad() != null){
+            airplane.setAmountOfLoad(airplaneDTO.getAmountOfLoad());
+        }
+        if(airplaneDTO.getAirplaneType() != null){
+            airplane.setAirplaneType(AirplaneType.valueOf(airplaneDTO.getAirplaneType()));
+        }
+        if(airplaneDTO.getAirplaneClassType() != null){
+            airplane.setAirplaneClassType(AirplaneClassType.valueOf(airplaneDTO.getAirplaneClassType()));
+        }
+        if(airplaneDTO.getAirplaneTicketType() != null){
+            airplane.setAirplaneTicketType(AirplaneTicketType.valueOf(airplaneDTO.getAirplaneTicketType()));
+        }
+        if(airplaneDTO.getLogo() != null){
+            airplane.setLogo(airplaneDTO.getLogo());
+        }
+        airplane.setCancel(airplaneDTO.isCancel());
         airplaneRepository.save(airplane);
         return new Response(HttpStatus.OK,
                 "Patch airplanes sucessfully",
