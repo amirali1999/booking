@@ -23,4 +23,10 @@ public class BookingException extends Exception {
     public static class IllegalException extends BookingException {
         public IllegalException(String message) {super(message);}
     }
+    public static class TokenRefreshException extends BookingException {
+        public TokenRefreshException(String message){super(message);}
+    }
+    public static class TokenExpireException extends BookingException {
+        public TokenExpireException(String message){super(message);}
+    }
 }

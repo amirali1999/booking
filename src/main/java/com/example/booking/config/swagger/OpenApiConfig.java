@@ -26,12 +26,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 )
         }
 )
-//@SecurityScheme(
-//        name = "Pod Token",
-//        description = "Authorize with Pod services",
-//        scheme = "Bearer",
-//        type = SecuritySchemeType.HTTP,
-//        in = SecuritySchemeIn.HEADER
-//)
+@SecurityScheme(
+        name = "token",
+        description = "Authorize",
+        scheme = "Bearer",
+        type = SecuritySchemeType.HTTP,
+        in = SecuritySchemeIn.HEADER
+)
 public class OpenApiConfig {
 }

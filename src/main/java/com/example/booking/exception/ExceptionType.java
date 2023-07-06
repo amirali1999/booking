@@ -27,6 +27,16 @@ public enum ExceptionType {
             LogLevel.INFO,
             ""
     ),
+    TOKEN_EXPIRE(BookingException.TokenExpireException.class,
+            HttpStatus.FORBIDDEN,
+            LogLevel.INFO,
+            "Token has been expire"
+    ),
+    TOKEN_REFRESH(BookingException.TokenRefreshException.class,
+            HttpStatus.FORBIDDEN,
+            LogLevel.INFO,
+            "Token refresh"
+    ),
     DEFAULT_EXCEPTION(null,
             HttpStatus.BAD_REQUEST,
             LogLevel.INFO,
