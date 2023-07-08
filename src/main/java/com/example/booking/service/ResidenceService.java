@@ -30,9 +30,18 @@ public class ResidenceService {
         List<Residence> residences = residenceRepository.findAll();
         return new Response(
                 HttpStatus.OK,
-                "Get residence sucessfully",
+                "Get residence successfully",
                 residenceMapper.DTOList(residences),
                 1);
+    }
+    public Response getResidenceById(Long id) throws BookingException.NotFoundException {
+        Residence residence = residenceRepository.findById(id)
+                .orElseThrow(() -> new BookingException.NotFoundException("id"));
+        return new Response(HttpStatus.OK,
+                "Get residence successfully",
+                residenceMapper.ObjectToDTO(residence),
+                1
+        );
     }
     public Response postResidence(ResidenceDTO residenceDTO) throws BookingException.NotFoundException {
         Residence residence = residenceMapper.DTOToObject(residenceDTO,cityRepository);

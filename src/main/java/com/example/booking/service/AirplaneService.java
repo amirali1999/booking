@@ -37,6 +37,14 @@ public class AirplaneService {
                 airplaneMapper.DTOList(airplanes),
                 1);
     }
+    public Response getAirplaneById(Long id) throws BookingException.NotFoundException {
+        Airplane airplane = airplaneRepository.findById(id).orElseThrow(()-> new BookingException.NotFoundException("id"));
+        return new Response(HttpStatus.OK,
+                "Get airplane successfully",
+                airplaneMapper.ObjectToDTO(airplane),
+                1
+        );
+    }
     public Response postAirplane(AirplaneDTO airplaneDTO) throws BookingException.NotFoundException {
         Airplane airplane = airplaneMapper.DTOToObject(airplaneDTO,cityRepository);
         airplaneRepository.save(airplane);

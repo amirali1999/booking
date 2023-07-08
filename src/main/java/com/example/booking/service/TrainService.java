@@ -45,6 +45,16 @@ public class TrainService {
                 1
         );
     }
+    public Response getTrainById(Long id) throws BookingException.NotFoundException {
+        Train train = trainRepository.findById(id)
+                .orElseThrow(() -> new BookingException.NotFoundException("id"));
+        return new Response(
+                HttpStatus.OK,
+                "Get train successfully",
+                trainMapper.ObjectToDTO(train),
+                1
+        );
+    }
     public Response postTrain(TrainDTO trainDTO) throws BookingException.NotFoundException {
         Train train = trainMapper.DTOToObject(trainDTO,cityRepository);
         trainRepository.save(train);
