@@ -45,4 +45,9 @@ public class ResidenceController {
                                             @RequestBody ResidenceDTO residenceDTO) throws BookingException.NotFoundException {
         return residenceService.patchResidence(id,residenceDTO).createResponseEntity();
     }
+    @GetMapping("{id}")
+    @PreAuthorize("hasAnyAuthority('admin','user')")
+    public ResponseEntity<?> findById(@PathVariable("id")Long id) throws BookingException.NotFoundException {
+        return residenceService.getResidenceById(id).createResponseEntity();
+    }
 }

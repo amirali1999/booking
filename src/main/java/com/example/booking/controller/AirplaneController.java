@@ -42,4 +42,10 @@ public class AirplaneController {
                                            @RequestBody AirplaneDTO airplaneDTO) throws BookingException.NotFoundException {
         return airplaneService.patchAirplane(id,airplaneDTO).createResponseEntity();
     }
+    @GetMapping("{id}")
+    @PreAuthorize("hasAnyAuthority('admin','user')")
+    public ResponseEntity<?> findById(@PathVariable("id")Long id) throws BookingException.NotFoundException {
+        return airplaneService.getAirplaneById(id).createResponseEntity();
+    }
+
 }

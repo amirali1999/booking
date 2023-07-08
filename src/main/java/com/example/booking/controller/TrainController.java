@@ -40,4 +40,9 @@ public class TrainController {
                                         @RequestBody TrainDTO trainDTO) throws BookingException.NotFoundException {
         return trainService.patchTrain(id,trainDTO).createResponseEntity();
     }
+    @GetMapping("{id}")
+    @PreAuthorize("hasAnyAuthority('admin','user')")
+    public ResponseEntity<?> findById(@PathVariable("id")Long id) throws BookingException.NotFoundException {
+        return trainService.getTrainById(id).createResponseEntity();
+    }
 }
